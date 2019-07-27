@@ -1,0 +1,21 @@
+body {
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+section.board {
+    display: grid;
+    grid-template-columns: repeat(3, 10vmin);
+    grid-template-rows: repeat(3, 10vmin);
+
+}
+
+section.board div {
+    border-radius: 100%;
+    border: 1px solid grey;    
+}
