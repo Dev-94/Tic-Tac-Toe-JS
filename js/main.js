@@ -31,6 +31,15 @@ const PLAYERS = {
     '0': 'white',
 };
 
+const winComb = [
+    [0,1,2],
+    [0,2,4],
+    [0,5,8],
+//add more combos once I understand how they are labeled
+
+]
+
+
 
 // 2) Define required variables used to track the state of the game
 let board, turn, winner;
@@ -44,8 +53,8 @@ let board, turn, winner;
 
 // 5) Handle a player clicking a square
     //below if code from connect four, to allow for clicking of squares
-document.querySelector('section.markers')
-    .addEventListener('click',handleClick);
+// document.querySelector('section.markers')
+//     .addEventListener('click',handleClick);
 
     //FUNCTIONs for each state variable
     board = [
@@ -60,7 +69,7 @@ document.querySelector('section.markers')
 
 
 //function of scenarios where the user is alerted a winner, game logic
-
+/*
 if 
 0[0] === -1 || 0[0] === 1
 0[1] === -1 || 0[1] === 1
@@ -81,12 +90,46 @@ next persons turn
 
 message is (taco wins || toe wins)
 
+
+
 everytime a box is clicked is changed to either 1 || -1
 everytime a box is clicked the turn changes from 1 to -1 || -1 to 1
 
+
+
+when js hears a click the box turn to 1 || -1
+then limit clicks to boxes and nothing else
+*/
+// document.addEventListener('click', dsafdasf);
+//     //replace 0 in id box
+//     //itereates through each box to see if it was clicked
+//     for(let i=0; i > board.length; i++) { 
+//         for(let j=0; j > board.length; j++) {
+//         document.getElementById([i][j])
+//     }
+// //find id of specific box that was clicked and change its color
+//                 //div.onClick().getElementByID(value === 1) 
+//                     //if 1 turn taco
+//                     // else turn toe
+//     document.querySelector('section.div.board').addEventListener('click', color());
+//     function color() {
+//  //       if statement;
+//     };
+ 
+//     document.getElementById("c0r0").addEventListener("click", function() {
+//             document.getElementById("box").style.color = "Blue";
+//         }
+//     );
+
+
+
+
+
+
+/*
 when a box is clicked it can not changed   
     put unclickable div there?
-
+*/
 
 
 
