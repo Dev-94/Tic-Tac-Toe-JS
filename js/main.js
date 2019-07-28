@@ -25,19 +25,39 @@
 
 
 // 1) Define required constants
+
+
+
+
+
+
+
+//NEW MESSAGE
+    //look over code
+    //find why it stop iterating thru players after the first move
+    //find why image is not changing from white after click
+    //learn how to change image to tacos and toes
+        //https://pbs.twimg.com/profile_images/638445562484781057/pLaAiF5d_400x400.png
+        //https://pbs.twimg.com/profile_images/631592765139238913/r3-Yuaba_400x400.jpg
+
 const PLAYERS = {
-    '1': 'taco',
-    '-1': 'toe',
-    '0': 'white',
+    '1': 'Toe',
+    '-1': 'Taco',
+    'null': 'white'
 };
 
 const winComb = [
-    [0,1,2],
-    [0,2,4],
-    [0,5,8],
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+];
 //add more combos once I understand how they are labeled
 
-]
 
 
 
@@ -45,18 +65,81 @@ const winComb = [
 let board, turn, winner;
 
 // 3) Store elements on the page that will be accessed in code more than once in variables to make code more concise, readable and performant.
+var box = document.querySelectorAll('section div');
+var msg = document.querySelector('h1');
+
 
 // 4) Upon loading the app should:
 // 	4.1) Initialize the state variables
 // 	4.2) Render those values to the page
 // 	4.3) Wait for the user to click a square
 
+// event listeners
+document.querySelector('section.board div').addEventListener('click', handleMove);
+document.querySelector('button').addEventListener('click', initialize);
+
 // 5) Handle a player clicking a square
+initialize();
+
+function handleMove(evt) {
+    //obtain index of square
+    var idx = parseInt(evt.target.id.replace('sq', ''));
+    //check if square is available and return if not
+    if (board[idx] || winner) return;
+    //update state (board, turn, winner)
+    board[idx] = turn;
+    turn *= -1;
+    winner = getWinner();
+    render();
+}
+
+
+function getWinner() {
+    for (var i=0; i<winComb.length; i++) {
+        if (Math.abs(board[winComb[i][0]] + board[winComb[i][1]] + board[winComb[i][2]]) === 3) return board[winComb[i][0]];
+    //     if(Math.abs(board[0] + board[1] + board[2]) === 3) return board[0];
+    //     if(Math.abs(board[3] + board[4] + board[5]) === 3) return board[3];
+    //     if(Math.abs(board[6] + board[7] + board[8]) === 3) return board[6];
+    //     if(Math.abs(board[0] + board[3] + board[6]) === 3) return board[0];
+    //     if(Math.abs(board[1] + board[4] + board[7]) === 3) return board[1];
+    //     if(Math.abs(board[2] + board[5] + board[8]) === 3) return board[2];
+    //     if(Math.abs(board[0] + board[4] + board[8]) === 3) return board[0];
+    //     if(Math.abs(board[2] + board[4] + board[6]) === 3) return board[2];
+    // 
+    }
+    if(board.includes(null)) return null;
+    return 'T';
+}
+
+function render() {
+    board.forEach(function(sq, idx) {
+        box[idx].style.background = PLAYERS[sq];
+        //change style.background to image associated with PLAYERS
+        //change sq to part of css?????
+    });
+    if(winner === 'T') {
+        msg.innerHTML = 'Rats, another tie!';
+    } else if (winner) {
+        msg.innerHTML = `Congrats ${PLAYERS[winner].toUpperCase()}!`;
+    } else {
+        msg.innerHTML = `${PLAYERS[turn].toUpperCase()}'s Turn`;
+    }
+}
+
+function initialize() {
+    board = [null,null,null,null,null,null,null,null,null];
+    turn = 1;
+    winner = null;
+    render();
+}
+
     //below if code from connect four, to allow for clicking of squares
 // document.querySelector('section.markers')
 //     .addEventListener('click',handleClick);
 
-    //FUNCTIONs for each state variable
+
+//may not need below
+/*    //FUNCTIONs for each state variable
     board = [
         [0, 0, 0], // column 1 (index 0)
         [0, 0, 0], // column 2 (index 1)
@@ -66,7 +149,8 @@ let board, turn, winner;
     winner = null;    // 1, -1, null(no winner), 'T'(tie)
 
                 //does board show up, does each space have to be iterated and rendered thru js or css??
-
+*/
+//may not need above
 
 //function of scenarios where the user is alerted a winner, game logic
 /*
